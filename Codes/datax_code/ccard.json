@@ -1,0 +1,59 @@
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 2
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "username": "root",
+            "password": "hadoop",
+            "splitPk": "CreditCardID",
+            "column": [
+              "CreditCardID",
+              "CardType",
+              "CardNumber",
+              "ExpMonth",
+              "ExpYear",
+              "ModifiedDate"
+            ],
+            "connection": [
+              {
+                "table": [
+                  "ccard"
+                ],
+                "jdbcUrl": [
+                  "jdbc:mysql://192.168.5.100:3306/zianvonjs?useUnicode=true&characterEncoding=utf8&useSSL=false"
+                ]
+              }
+            ]
+          }
+        },
+        "writer": {
+          "name": "hdfswriter",
+          "parameter": {
+            "defaultFS": "hdfs://node100:9000",
+            "fileName": "ccard.orc",
+            "fieldDelimiter": "\t",
+            "fileType": "orc",
+            "path": "/zianvonjs_ds/creditcard/",
+            "column": [
+              { "name": "CreditCardID", "type": "bigint" },
+              { "name": "CardType", "type": "string" },
+              { "name": "CardNumber", "type": "string" },
+              { "name": "ExpMonth", "type": "bigint" },
+              { "name": "ExpYear", "type": "bigint" },
+              { "name": "ModifiedDate", "type": "string" }
+            ],
+            "writeMode": "truncate",
+            "compression": "none"
+          }
+        }
+      }
+    ]
+  }
+}
