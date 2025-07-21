@@ -1,0 +1,67 @@
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 2
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "username": "root",
+            "password": "hadoop",
+            "splitPk": "CustomerID",
+            "column": [
+              "CustomerID",
+              "Name",
+              "SalesPersonID",
+              "Demographics",
+              "TerritoryID",
+              "SalesQuota",
+              "CommissionPct",
+              "SalesYTD",
+              "SalesLastYear",
+              "ModifiedDate"
+            ],
+            "connection": [
+              {
+                "table": [
+                  "v_stores"
+                ],
+                "jdbcUrl": [
+                  "jdbc:mysql://192.168.5.100:3306/zianvonjs?useUnicode=true&characterEncoding=utf8&useSSL=false"
+                ]
+              }
+            ]
+          }
+        },
+        "writer": {
+          "name": "hdfswriter",
+          "parameter": {
+            "defaultFS": "hdfs://node100:9000",
+            "fileName": "vstores.orc",
+            "fieldDelimiter": "\t",
+            "fileType": "orc",
+            "path": "/zianvonjs_ds/v_stores/",
+            "column": [
+              { "name": "CustomerID", "type": "bigint" },
+              { "name": "Name", "type": "string" },
+              { "name": "SalesPersonID", "type": "bigint" },
+              { "name": "Demographics", "type": "string" },
+              { "name": "TerritoryID", "type": "bigint" },
+              { "name": "SalesQuota", "type": "double" },
+              { "name": "CommissionPct", "type": "double" },
+              { "name": "SalesYTD", "type": "double" },
+              { "name": "SalesLastYear", "type": "double" },
+              { "name": "ModifiedDate", "type": "string" }
+            ],
+            "writeMode": "truncate",
+            "compression": "none"
+          }
+        }
+      }
+    ]
+  }
+}
