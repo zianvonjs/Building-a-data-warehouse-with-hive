@@ -1,0 +1,75 @@
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 2
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "username": "root",
+            "password": "hadoop",
+            "splitPk": "SalesOrderID",
+            "column": [
+              "SalesOrderDetailID",
+              "SalesOrderID",
+              "CarrierTrackingNumber",
+              "OrderQty",
+              "ProductID",
+              "UnitPrice",
+              "UnitPriceDiscount",
+              "LineTotal",
+              "SpecialOfferID",
+              "Description",
+              "DiscountPct",
+              "Type",
+              "Category",
+              "ModifiedDate"
+            ],
+            "connection": [
+              {
+                "table": [
+                  "v_salesorderdetails_demo"
+                ],
+                "jdbcUrl": [
+                  "jdbc:mysql://192.168.5.100:3306/zianvonjs?useUnicode=true&characterEncoding=utf8&useSSL=false"
+                ]
+              }
+            ]
+          }
+        },
+        "writer": {
+          "name": "hdfswriter",
+          "parameter": {
+            "defaultFS": "hdfs://node100:9000",
+            "fileName": "salesorderdetails.orc",
+            "fieldDelimiter": "\t",
+            "fileType": "orc",
+            "path": "/zianvonjs_ds/v_salesorderdetails_demo/",
+            "column": [
+              { "name": "SalesOrderDetailID", "type": "bigint" },
+              { "name": "SalesOrderID", "type": "bigint" },
+              { "name": "CarrierTrackingNumber", "type": "string" },
+              { "name": "OrderQty", "type": "bigint" },
+              { "name": "ProductID", "type": "bigint" },
+              { "name": "UnitPrice", "type": "double" },
+              { "name": "UnitPriceDiscount", "type": "double" },
+              { "name": "LineTotal", "type": "double" },
+              { "name": "SpecialOfferID", "type": "bigint" },
+              { "name": "Description", "type": "string" },
+              { "name": "DiscountPct", "type": "double" },
+              { "name": "Type", "type": "string" },
+              { "name": "Category", "type": "string" },
+              { "name": "ModifiedDate", "type": "string" }
+            ],
+            "writeMode": "truncate",
+            "compression": "none"
+          }
+        }
+      }
+    ]
+  }
+}
