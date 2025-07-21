@@ -1,0 +1,59 @@
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 2
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "username": "root",
+            "password": "hadoop",
+            "splitPk": "CustomerID",
+            "column": [
+              "CustomerID",
+              "AccountNumber",
+              "CustomerType",
+              "Demographics",
+              "TerritoryID",
+              "ModifiedDate"
+            ],
+            "connection": [
+              {
+                "table": [
+                  "v_customer"
+                ],
+                "jdbcUrl": [
+                  "jdbc:mysql://192.168.5.100:3306/zianvonjs?useUnicode=true&characterEncoding=utf8&useSSL=false"
+                ]
+              }
+            ]
+          }
+        },
+        "writer": {
+          "name": "hdfswriter",
+          "parameter": {
+            "defaultFS": "hdfs://node100:9000",
+            "fileName": "vcustomer.orc",
+            "fieldDelimiter": "\t",
+            "fileType": "orc",
+            "path": "/zianvonjs_ds/v_customer/",
+            "column": [
+              { "name": "CustomerID", "type": "bigint" },
+              { "name": "AccountNumber", "type": "string" },
+              { "name": "CustomerType", "type": "string" },
+              { "name": "Demographics", "type": "string" },
+              { "name": "TerritoryID", "type": "bigint" },
+              { "name": "ModifiedDate", "type": "string" }
+            ],
+            "writeMode": "truncate",
+            "compression": "none"
+          }
+        }
+      }
+    ]
+  }
+}
