@@ -1,0 +1,100 @@
+
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 2
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "username": "root",
+            "password": "hadoop",
+            "splitPk": "SalesOrderID",
+            "column": [
+              "SalesOrderID",
+              "OrderDate",
+              "DueDate",
+              "ShipDate",
+              "Status",
+              "SalesOrderNumber",
+              "PurchaseOrderNumber",
+              "AccountNumber",
+              "CustomerID",
+              "ContactID",
+              "BillToAddressID",
+              "ShipToAddressID",
+              "ShipMethodID",
+              "CreditCardID",
+              "CreditCardApprovalCode",
+              "CurrencyRateID",
+              "SubTotal",
+              "TaxAmt",
+              "Freight",
+              "TotalDue",
+              "Comment",
+              "SalesPersonID",
+              "TerritoryID",
+              "territory",
+              "CountryRegionCode",
+              "ModifiedDate"
+            ],
+            "connection": [
+              {
+                "table": [
+                  "v_salesorderheader_demo"
+                ],
+                "jdbcUrl": [
+                  "jdbc:mysql://192.168.5.100:3306/zianvonjs?useUnicode=true&characterEncoding=utf8&useSSL=false"
+                ]
+              }
+            ]
+          }
+        },
+        "writer": {
+          "name": "hdfswriter",
+          "parameter": {
+            "defaultFS": "hdfs://node100:9000",
+            "fileName": "salesorderheader.orc",
+            "fieldDelimiter": "\t",
+            "fileType": "orc",
+            "path": "/zianvonjs_ds/v_salesorderheader_demo/",
+            "column": [
+              { "name": "SalesOrderID", "type": "bigint" },
+              { "name": "OrderDate", "type": "string" },
+              { "name": "DueDate", "type": "string" },
+              { "name": "ShipDate", "type": "string" },
+              { "name": "Status", "type": "int" },
+              { "name": "SalesOrderNumber", "type": "string" },
+              { "name": "PurchaseOrderNumber", "type": "string" },
+              { "name": "AccountNumber", "type": "string" },
+              { "name": "CustomerID", "type": "bigint" },
+              { "name": "ContactID", "type": "bigint" },
+              { "name": "BillToAddressID", "type": "bigint" },
+              { "name": "ShipToAddressID", "type": "bigint" },
+              { "name": "ShipMethodID", "type": "bigint" },
+              { "name": "CreditCardID", "type": "bigint" },
+              { "name": "CreditCardApprovalCode", "type": "string" },
+              { "name": "CurrencyRateID", "type": "bigint" },
+              { "name": "SubTotal", "type": "double" },
+              { "name": "TaxAmt", "type": "double" },
+              { "name": "Freight", "type": "double" },
+              { "name": "TotalDue", "type": "double" },
+              { "name": "Comment", "type": "string" },
+              { "name": "SalesPersonID", "type": "bigint" },
+              { "name": "TerritoryID", "type": "bigint" },
+              { "name": "territory", "type": "string" },
+              { "name": "CountryRegionCode", "type": "string" },
+              { "name": "ModifiedDate", "type": "string" }
+            ],
+            "writeMode": "truncate",
+            "compression": "none"
+          }
+        }
+      }
+    ]
+  }
+}
